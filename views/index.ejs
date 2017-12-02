@@ -8,14 +8,53 @@
   <title>
     <%= title %>
   </title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
 </head>
 
 <body>
-  <h2>This is a test webpage for PayPal Braintree SDK Integration</h2>
-  
-  <div id="payment-result"></div>
+  <div id="loadingSection" class="loading-section">
+    <img id="loadingImage" class="loading-images" src="/images/icon-load.gif" alt="Loading..." />
+  </div>
 
-  <div id="paypal-btn"></div>
+  <h2>This is a test webpage for PayPal Braintree SDK Integration</h2>
+
+  <table id="orderSection" class="order-section">
+    <!--tr>
+      <td>Order ID:</td>
+      <td id="order-id"></td> 
+    </tr-->
+    <tr>
+      <td>Product:</td>
+      <td>
+        <input type="text" id="productName" value="Notebook">
+      </td>
+    </tr>
+    <tr>
+      <td>Order Amount:</td>
+      <td>
+        <select id="orderAmount">
+          <option value="0.50">0.5</option>
+          <option value="1.00">1</option>
+          <option value="2.00">2</option>
+          <option value="5.00">5</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Currentcy:</td>
+      <td>
+        <select id="orderCurrency">
+          <option value="USD">USD</option>
+          <option value="SGD">SGD</option>
+          <option value="HKD">HKD</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <div id="paymentResult" class="payment-result"></div>
+
+  <div id="paypalButton"></div>
 
 </body>
 

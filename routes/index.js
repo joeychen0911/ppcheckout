@@ -8,6 +8,19 @@ var express = require('express'),
     router = express.Router(),
     TITLE = 'PayPal Checkout Demo Page - Joey'
 
+function generateOrderID(){
+    var now = new Date();
+    var timestamp = now.getFullYear().toString();
+    timestamp += (now.getMonth() < 9 ? '0' : '') + (now.getMonth() + 1).toString();
+    timestamp += ((now.getDate() < 10) ? '0' : '') + now.getDate().toString();
+    timestamp += ((now.getHours() < 10) ? '0' : '') + now.getHours().toString();
+    timestamp += ((now.getMinutes() < 10) ? '0' : '') + now.getMinutes().toString();
+    timestamp += ((now.getSeconds() < 10) ? '0' : '') + now.getSeconds().toString();
+    timestamp += ((now.getMilliseconds() < 10) ? '00' : (now.getMilliseconds() < 100 ? '0' : '')) + now.getMilliseconds().toString();
+    var randomNumber = Math.floor(Math.random()*1000000).toString();
+    return timestamp + randomNumber;
+}
+
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -38,9 +51,9 @@ router.post("/checkout", function (req, res) {
 
     var saleRequest = {
         amount: req.body.amount,
-        merchantAccountId: "USD",
+        merchantAccountId: req.body.currency,
         paymentMethodNonce: req.body.nonce,
-        orderId: "Mapped to PayPal Invoice Number",
+        orderId: generateOrderID(),
         /*descriptor: {
             name: "companyproduct name"
         },*/

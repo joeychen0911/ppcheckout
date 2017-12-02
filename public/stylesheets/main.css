@@ -1,0 +1,43 @@
+body {
+    background-color: white;
+}
+
+.loading-section {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color: #fff;
+    z-index: 299;
+    text-align: center;
+}
+
+.loading-section .loading-images {
+    position: absolute;
+    z-index: 300;
+    height: 100px;
+    margin-top: 30%;
+}
+
+.order-section {
+    width: 350px;
+    border-style: double;
+}
+
+.order-section select {
+    width: 100%;
+}
+
+.order-section input {
+    width: 100%;
+}
+
+.payment-result{
+    margin: 15px;
+    font-family: sans-serif;
+    font-style: oblique;
+    font-weight: 600;
+}

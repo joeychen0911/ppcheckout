@@ -1,7 +1,38 @@
 //var client_token
 
-var orderID;
+var shipping_address = {
+    recipientName: 'Joey Chen',
+    line1: '1234 Main St.',
+    line2: 'Unit 1',
+    city: 'Chicago',
+    countryCode: 'US',
+    postalCode: '60652',
+    state: 'IL',
+    phone: '123.456.7890'
+};
 
+function loadingStart() {
+    $('#loadingSection').show();
+}
+
+function loadingStop() {
+    $('#loadingSection').hide();
+}
+
+function displayInfo(info) {
+    $('#paymentResult').html(info);
+}
+
+function getPaymentInfo() {
+    var paymentInfo = {};
+    paymentInfo['amount'] = $('#orderAmount').find(':selected').val();
+    paymentInfo['currency'] = $('#orderCurrency').find(':selected').val();
+    paymentInfo['shippingAddress'] = shipping_address;
+    return paymentInfo;
+}
+
+
+loadingStart();
 
 
 $.ajax({
@@ -19,18 +50,24 @@ $.ajax({
             }
 
             renderPPButton(buttonOptions);
+            loadingStop();
         } else {
             console.error("No data received from the server!");
+            displayInfo("No data received from the server!");
+            loadingStop();
         }
     },
     error: function (xhr, errorType, error) {
-        console.error("No response from the server!");
+        console.error(error);
+        displayInfo(error);
+        loadingStop();
     }
 })
 
 
 
 function renderPPButton(options) {
+    
     paypal.Button.render({
         braintree: braintree,
 
@@ -42,7 +79,7 @@ function renderPPButton(options) {
         commit: true, // Show a 'Pay Now' button
 
         style: {
-            color: 'gold',
+            color: 'blue',
             size: 'small'
         },
 
@@ -50,23 +87,15 @@ function renderPPButton(options) {
             /* 
              * Set up the payment here 
              */
+            var paymentInfo = getPaymentInfo();
             console.log("payment button clicked");
             return actions.braintree.create({
                 flow: 'checkout', // Required
-                amount: 0.88, // Required
-                currency: 'USD', // Required
+                amount: paymentInfo.amount, // Required
+                currency: paymentInfo.currency, // Required
                 enableShippingAddress: true,
                 shippingAddressEditable: false,
-                shippingAddressOverride: {
-                    recipientName: 'Scruff McGruff',
-                    line1: '1234 Main St.',
-                    line2: 'Unit 1',
-                    city: 'Chicago',
-                    countryCode: 'US',
-                    postalCode: '60652',
-                    state: 'IL',
-                    phone: '123.456.7890'
-                }
+                shippingAddressOverride: paymentInfo.shippingAddress
             });
         },
 
@@ -74,33 +103,39 @@ function renderPPButton(options) {
             /* 
              * Send nonce to seller server
              */
+            loadingStart();
             console.log(payload);
             console.log("payment authorized by buyer");
-           
-            var paymentInfo = {};
+            var paymentInfo = getPaymentInfo();
+            var authorizeInfo = {};
+            authorizeInfo["nonce"] = payload.nonce;
+            authorizeInfo["amount"] = paymentInfo.amount;
+            authorizeInfo["currency"] = paymentInfo.currency;
 
-            paymentInfo["nonce"] = payload.nonce;
-            paymentInfo["amount"] = 1.8;
-            
             $.ajax({
                 type: "POST",
                 url: "/checkout",
-                data: paymentInfo,
+                data: authorizeInfo,
                 //dataType: "json",
                 //timeout: 30000,
                 success: function (data, status, xhr) {
                     if (data) {
                         console.log(data);
-                        $('#payment-result').html(data);
+                        displayInfo("Payment Result: " + data)
+                        loadingStop();
                     } else {
                         console.error("No data received from the server!");
+                        displayInfo("ERROR: No data received from the server!")
+                        loadingStop();
                     }
                 },
                 error: function (xhr, errorType, error) {
                     console.error(error);
+                    displayInfo(ERROR)
+                    loadingStop();
                 }
             }
-        )
+            )
         },
 
         onCancel: function (data, actions) {
@@ -117,5 +152,5 @@ function renderPPButton(options) {
             console.error(err);
         }
 
-    }, '#paypal-btn');
+    }, '#paypalButton');
 }
