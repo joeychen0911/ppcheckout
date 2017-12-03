@@ -47,8 +47,7 @@ body {
 }
 
 .confirmation-info {
-    border-radius: 10px;    
-    margin-left: 20%;
+    border-radius: 10px;
     margin-top: 20%;
     /* height: 300px; */
     width: 400px;
@@ -56,6 +55,8 @@ body {
     background: white;
     opacity: 1;
     z-index: 200;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .confirmation-content {
@@ -105,8 +106,7 @@ body {
 }
 
 .result-content {
-    border-radius: 10px;    
-    margin-left: 20%;
+    border-radius: 10px;
     margin-top: 20%;
     /* height: 300px; */
     width: 400px;
@@ -114,6 +114,8 @@ body {
     background: white;
     opacity: 1;
     z-index: 200;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .payment-result {
