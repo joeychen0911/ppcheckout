@@ -22,9 +22,127 @@ body {
     margin-top: 30%;
 }
 
+.confirmation-section {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    z-index: 198;
+    text-align: center;
+    display: none;
+}
+
+.confirmation-overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color: rgb(197, 197, 197);
+    z-index: 199;
+}
+
+.confirmation-info {
+    border-radius: 10px;    
+    margin-left: 20%;
+    margin-top: 20%;
+    /* height: 300px; */
+    width: 400px;
+    border-style: solid;
+    background: white;
+    opacity: 1;
+    z-index: 200;
+}
+
+.confirmation-content {
+    margin: 15px;
+    width: 100%;
+    text-align: left;
+    z-index: 201;
+}
+
+.confirmation-button {
+    position: relative;
+    z-index: 201;
+    height: 20px;
+    /* margin-top: 91%; */
+    text-align: center;
+    width: 75%;
+    border-style: double;
+    background: darkgray;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.result-section {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    z-index: 198;
+    text-align: center;
+    display: none;
+}
+
+.result-overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color: rgb(197, 197, 197);
+    z-index: 199;
+}
+
+.result-content {
+    border-radius: 10px;    
+    margin-left: 20%;
+    margin-top: 20%;
+    /* height: 300px; */
+    width: 400px;
+    border-style: solid;
+    background: white;
+    opacity: 1;
+    z-index: 200;
+}
+
+.payment-result {
+    margin: 15px;
+    font-family: sans-serif;
+    font-style: oblique;
+    font-weight: 600;
+    text-align: left;
+}
+
+.continue-button {
+    position: relative;
+    z-index: 201;
+    height: 20px;
+    /* margin-top: 91%; */
+    text-align: center;
+    width: 75%;
+    border-style: double;
+    background: darkgray;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
 .order-section {
     width: 350px;
     border-style: double;
+    margin: 15px;
 }
 
 .order-section select {
@@ -35,7 +153,9 @@ body {
     width: 100%;
 }
 
-.payment-result{
+
+
+.payment-Info {
     margin: 15px;
     font-family: sans-serif;
     font-style: oblique;
