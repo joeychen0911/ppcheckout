@@ -74,7 +74,7 @@ function executePayment(paymentConfirmation) {
     loadingStart();
     $.ajax({
         type: "POST",
-        url: "/checkout",
+        url: "./checkout",
         data: paymentConfirmation,
         //dataType: "json",
         //timeout: 30000,
@@ -85,7 +85,7 @@ function executePayment(paymentConfirmation) {
                 var resultHtml = "Thanks for your purchase!<br><br>Here's the payment result:<br>" + data;
                 $('#paymentResult').html(resultHtml);
                 $('#continueButton').one('click',function(){
-                    $(location).attr('href','/');
+                    $(location).attr('href','./');
                 })
                 displayResult();
                 loadingStop();
@@ -108,7 +108,7 @@ loadingStart();
 
 $.ajax({
     type: "GET",
-    url: "/client_token",
+    url: "./client_token",
     timeout: 30000,
     success: function (data, status, xhr) {
         if (data) {
